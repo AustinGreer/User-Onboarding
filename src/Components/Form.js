@@ -1,7 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
 
-function Form () {
+function Form (props) {
+    const { values, errors, disabled, inputHandler} = props
+
+    const onChange = (event) => {
+        const {name, value, type, checked } = event.target
+        const valueToUse = type === 'checkbox' ? checked : value
+        inputHandler(name, valueToUse)
+    }
+    
     return (
         <StyledDiv>
             <form>
@@ -11,6 +19,8 @@ function Form () {
                     <input 
                         type='text'
                         name='name'
+                        value={values.name}
+                        onChange={onChange}
                     />
                 </label>
 
@@ -19,6 +29,8 @@ function Form () {
                     <input
                         type='email'
                         name='email'
+                        value={values.email}
+                        onChange={onChange}
                     />
                 </label>
 
@@ -27,6 +39,8 @@ function Form () {
                     <input 
                         type='password'
                         name='password'
+                        value={values.password}
+                        onChange={onChange}
                     />
                 </label>
 
@@ -34,11 +48,13 @@ function Form () {
                     Terms of Service:
                     <input 
                         type='checkbox'
-                        name='Terms of Service'
+                        name='tos' 
+                        checked={values.tos}
+                        onChange={onChange}
                     />
                 </label>
 
-                <button type='submit'>Submit!</button>
+                <StyledButton type='submit' disabled={disabled}>Submit!</StyledButton>
             </form>
         </StyledDiv>
     )
@@ -51,7 +67,17 @@ const StyledDiv = styled.div`
         flex-direction: column;
         align-items: center;
         justify-content: center;
+
+            label {
+                margin-bottom: 3%;
+            }
     }
+`
+
+const StyledButton = styled.button`
+    width: 10%;
+    height: 1.5rem;
+    background: orange;
 `
 
 export default Form
