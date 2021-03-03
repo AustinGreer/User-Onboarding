@@ -34,9 +34,26 @@ function App() {
   
   
 
+  //onChange handler
   const inputHandler = (inputName, inputValue) => {
     setFormValues({...formValues, [inputName]: inputValue})
   }
+
+  //submit button handler
+  const submitHandler = () => {
+    const newUser = {
+      name: formValues.name.trim(),
+      email: formValues.email.trim(),
+      password: formValues.password.trim(),
+      tos: formValues.tos.trim()
+    }
+  }
+
+  //submit button validation
+  useEffect(() => {
+    formSchema.isValid(formValues)
+    .then(valid => setDisabled(!valid))
+  }, [formValues])
 
   return (
     <div className="App">
