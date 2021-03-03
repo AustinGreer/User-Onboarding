@@ -76,6 +76,7 @@ const StyledDiv = styled.div`
         flex-direction: column;
         align-items: center;
         justify-content: center;
+        margin-bottom: 5%;
 
             label {
                 margin-bottom: 3%;
