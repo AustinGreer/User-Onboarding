@@ -2,17 +2,21 @@ import React from 'react'
 import styled from 'styled-components'
 
 function Form (props) {
-    const { values, errors, disabled, inputHandler} = props
+    const { values, errors, disabled, inputHandler, submitHandler} = props
 
     const onChange = (event) => {
         const {name, value, type, checked } = event.target
         const valueToUse = type === 'checkbox' ? checked : value
         inputHandler(name, valueToUse)
     }
-    
+
+    const onSubmit = event => {
+        event.preventDefault();
+        submitHandler()
+    }
     return (
         <StyledDiv>
-            <form>
+            <form onSubmit={onSubmit}>
                 <h1>Welcome to User Onboard!</h1>
                 <p>{errors.name}</p>
                 <p>{errors.email}</p>
@@ -60,6 +64,7 @@ function Form (props) {
 
                 <StyledButton type='submit' disabled={disabled}>Submit!</StyledButton>
             </form>
+            
         </StyledDiv>
     )
 }
