@@ -36,6 +36,18 @@ function App() {
 
   //onChange handler
   const inputHandler = (inputName, inputValue) => {
+    // validation
+    yup.reach(formSchema, inputName)
+    .validate(inputValue)
+    .then(() => {
+      setFormErrors({...formErrors, [inputName]: ''})
+    })
+    .catch(err => {
+      setFormErrors({...formErrors, [inputName]: err.errors[0]})
+    })
+
+
+    // setting state to the form values
     setFormValues({...formValues, [inputName]: inputValue})
   }
 
@@ -54,6 +66,7 @@ function App() {
     formSchema.isValid(formValues)
     .then(valid => setDisabled(!valid))
   }, [formValues])
+
 
   return (
     <div className="App">

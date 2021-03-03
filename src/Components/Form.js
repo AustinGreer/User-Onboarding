@@ -14,6 +14,10 @@ function Form (props) {
         <StyledDiv>
             <form>
                 <h1>Welcome to User Onboard!</h1>
+                <p>{errors.name}</p>
+                <p>{errors.email}</p>
+                <p>{errors.password}</p>
+                <p>{errors.tos}</p>
                 <label>
                     Name:
                     <input 
